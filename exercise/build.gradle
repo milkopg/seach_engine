@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+group = 'net.icdpublishing'
+version = '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+jar {
+    baseName = 'exercise'
+}
+
+repositories {
+    mavenLocal()
+
+    maven {
+        url "http://repo1.maven.org/maven2"
+    }
+    maven {
+        url "http://oss.sonatype.org/content/repositories/snapshots/"
+    }
+
+    flatDir {
+        dir 'external_dependencies'
+    }
+}
+dependencies {
+    compile group: 'net.icdpublishing.exercise2', name: 'search-engine', version:'1.0'
+    compile group: 'net.icdpublishing.exercise2', name: 'legacy-charging', version:'1.0'
+    compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
+
+    testCompile group: 'junit', name: 'junit', version:'4.8.1'
+    testCompile "org.codehaus.groovy:groovy-all:2.3.8"
+    testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+}
